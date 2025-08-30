@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sasha Site</title>
+  <title>My Animated Site</title>
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
-      background: #0f2027;
-      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
       color: #fff;
       scroll-behavior: smooth;
       overflow-x: hidden;
       position: relative;
+
+      /* Анімація градієнта для всього body */
+      background: linear-gradient(135deg, #1e3c72, #2a5298, #42275a, #734b6d, #134e5e, #71b280);
+      background-size: 1200% 1200%;
+      animation: gradientBG 30s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Анімовані фігури */
@@ -88,10 +97,6 @@
       position: relative;
       z-index: 1;
     }
-
-    #home { background: linear-gradient(135deg, #1e3c72, #2a5298); }
-    #about { background: linear-gradient(135deg, #42275a, #734b6d); }
-    #contact { background: linear-gradient(135deg, #134e5e, #71b280); }
 
     /* Контейнер з рамкою */
     .content-box {
