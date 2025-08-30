@@ -3,16 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sashasite</title>
+  <title>sasha Site</title>
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
-      background: #0f2027;  /* фон сайту */
+      background: #0f2027;
       background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
       color: #fff;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Анімовані фігури */
+    .shape {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      z-index: 0;
+    }
+
+    .shape.small { width: 50px; height: 50px; left: 10%; top: 20%; animation-duration: 18s; }
+    .shape.medium { width: 100px; height: 100px; left: 70%; top: 40%; animation-duration: 25s; }
+    .shape.large { width: 150px; height: 150px; left: 40%; top: 70%; animation-duration: 30s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-50px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
     }
 
     /* Навбар */
@@ -61,34 +81,31 @@
     .section {
       height: 100vh;
       padding: 4rem 2rem;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px) scale(0.98);
-      transition: all 1s ease;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    #home { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+    #about { background: linear-gradient(135deg, #42275a, #734b6d); }
+    #contact { background: linear-gradient(135deg, #134e5e, #71b280); }
+
+    /* Контейнер з рамкою */
+    .content-box {
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 1.5s ease forwards;
     }
 
-    #home {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-    }
-
-    #about {
-      background: linear-gradient(135deg, #42275a, #734b6d);
-    }
-
-    #contact {
-      background: linear-gradient(135deg, #134e5e, #71b280);
-    }
-
-    /* Тексти */
     h1 {
       margin-bottom: 1rem;
       font-size: 3rem;
@@ -97,8 +114,7 @@
 
     p {
       line-height: 1.6;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
+      margin-bottom: 1.5rem;
       font-size: 1.2rem;
     }
 
@@ -128,13 +144,23 @@
       transition: all 0.4s;
     }
 
-    .btn:hover::before {
-      left: 100%;
-    }
+    .btn:hover::before { left: 100%; }
 
     .btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 25px rgba(0, 230, 255, 0.8);
+    }
+
+    /* Glow текст */
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00e6ff, 0 0 10px #00e6ff; }
+      to { text-shadow: 0 0 20px #00e6ff, 0 0 40px #00e6ff; }
+    }
+
+    /* Fade-in */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Футер */
@@ -144,39 +170,23 @@
       background: rgba(0, 0, 0, 0.8);
       color: white;
       font-size: 0.9rem;
-    }
-
-    /* Glow текст */
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #00e6ff, 0 0 10px #00e6ff; }
-      to { text-shadow: 0 0 20px #00e6ff, 0 0 40px #00e6ff; }
+      z-index: 1;
+      position: relative;
     }
 
     /* Адаптивність */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      h1 {
-        font-size: 1.6rem;
-      }
-      p {
-        font-size: 0.9rem;
-      }
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Анімовані фігури -->
+  <div class="shape small"></div>
+  <div class="shape medium"></div>
+  <div class="shape large"></div>
 
   <!-- Навбар -->
   <nav>
@@ -187,55 +197,39 @@
 
   <!-- Home -->
   <section class="section" id="home">
-    <h1>Welcome to Our Foundation</h1>
-    <p>We are dedicated to making the world a better place by supporting communities in need. 
-       Our mission is to provide education, resources, and opportunities for everyone.</p>
-    <a href="#about" class="btn">Learn More</a>
+    <div class="content-box">
+      <h1>Welcome to Our Foundation</h1>
+      <p>We are dedicated to making the world a better place by supporting communities in need. 
+         Our mission is to provide education, resources, and opportunities for everyone.</p>
+      <a href="#about" class="btn">Learn More</a>
+    </div>
   </section>
 
   <!-- About -->
   <section class="section" id="about">
-    <h1>About Us</h1>
-    <p>Our foundation was created to help people in challenging situations. 
-       We focus on humanitarian aid, social projects, and education. 
-       Transparency and trust are the values we live by.</p>
-    <a href="#contact" class="btn">Get in Touch</a>
+    <div class="content-box">
+      <h1>About Us</h1>
+      <p>Our foundation was created to help people in challenging situations. 
+         We focus on humanitarian aid, social projects, and education. 
+         Transparency and trust are the values we live by.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
   </section>
 
   <!-- Contact -->
   <section class="section" id="contact">
-    <h1>Contact</h1>
-    <p>Email: info@foundation.org</p>
-    <p>Phone: +48 123 456 789</p>
-    <p>Address: Marszałkowska Street 10, Warsaw</p>
-    <a href="#home" class="btn">Back to Top</a>
+    <div class="content-box">
+      <h1>Contact</h1>
+      <p>Email: info@foundation.org</p>
+      <p>Phone: +48 123 456 789</p>
+      <p>Address: Marszałkowska Street 10, Warsaw</p>
+      <a href="#home" class="btn">Back to Top</a>
+    </div>
   </section>
 
   <!-- Футер -->
   <footer>
     © 2025 Foundation. All rights reserved.
   </footer>
-
-  <!-- JS для fade-in -->
-  <script>
-    const sections = document.querySelectorAll('.section');
-
-    function revealSections() {
-      const triggerBottom = window.innerHeight * 0.85;
-
-      sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-
-        if (sectionTop < triggerBottom) {
-          section.classList.add('visible');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('load', revealSections);
-  </script>
-
 </body>
 </html>
-
