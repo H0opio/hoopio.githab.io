@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sasha site</title> <!-- 🔹 Тут міняєш назву сайту -->
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      scroll-behavior: smooth; /* 🔹 Плавний перехід між секціями */
+    }
+
+    /* Навігація */
+    nav {
+      background-color: #004080;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    /* 🔹 Анімація підкреслення */
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #ffd700;
+      left: 0;
+      bottom: -4px;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Контейнер */
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      opacity: 0; 
+      transform: translateY(30px); 
+      animation: fadeInUp 1s forwards;
+    }
+
+    /* 🔹 Анімація появи блоків */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: #004080;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    p {
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #004080;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    /* --- АДАПТИВНІСТЬ --- */
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      .container {
+        margin: 0.5rem;
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Меню -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Головна -->
+  <div class="container" id="home" style="animation-delay: 0.2s;">
+    <h1>Welcome to Our Foundation</h1>
+    <p>We are dedicated to making the world a better place by helping communities in need. 
+       Our mission is to provide support, education, and opportunities for everyone.</p>
+  </div>
+
+  <!-- Про нас -->
+  <div class="container" id="about" style="animation-delay: 0.6s;">
+    <h1>About Us</h1>
+    <p>Our foundation was established to help people in difficult life situations. 
+       We focus on humanitarian aid, education, and social projects. 
+       Transparency and trust are our main values.</p>
+  </div>
+
+  <!-- Контакти -->
+  <div class="container" id="contact" style="animation-delay: 1s;">
+    <h1>Contact</h1>
+    <p>Email: info@foundation.org</p>
+    <p>Phone: +48 123 456 789</p>
+    <p>Address: Marszałkowska Street 10, Warsaw</p>
+  </div>
+
+  <!-- Футер -->
+  <footer>
+    © 2025 Sashacorporation. All rights reserved.
+  </footer>
+
+</body>
+</html>
+
