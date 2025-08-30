@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sasha site</title> <!-- 🔹 Тут міняєш назву сайту -->
+  <title>My Foundation Website</title>
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      scroll-behavior: smooth; /* 🔹 Плавний перехід між секціями */
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     /* Навігація */
@@ -31,9 +32,13 @@
       font-weight: bold;
       font-size: 1.1rem;
       position: relative;
+      transition: color 0.3s;
     }
 
-    /* 🔹 Анімація підкреслення */
+    nav a:hover {
+      color: #ffd700;
+    }
+
     nav a::after {
       content: "";
       position: absolute;
@@ -49,76 +54,98 @@
       width: 100%;
     }
 
-    /* Контейнер */
-    .container {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      opacity: 0; 
-      transform: translateY(30px); 
-      animation: fadeInUp 1s forwards;
-    }
-
-    /* 🔹 Анімація появи блоків */
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    h1 {
-      color: #004080;
-      margin-bottom: 1rem;
-      font-size: 2rem;
+    /* Секції */
+    .section {
+      height: 100vh; /* Кожна секція займає цілий екран */
+      padding: 4rem 2rem;
       text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #home {
+      background: linear-gradient(135deg, #004080, #0073e6);
+      color: white;
+    }
+
+    #about {
+      background: #ffffff;
+      color: #333;
+    }
+
+    #contact {
+      background: #f0f8ff;
+      color: #333;
+    }
+
+    /* Тексти */
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
     }
 
     p {
       line-height: 1.6;
-      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      font-size: 1.2rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
+    /* Кнопки */
+    .btn {
+      display: inline-block;
       background: #004080;
       color: white;
-      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    /* --- АДАПТИВНІСТЬ --- */
+    .btn:hover {
+      background: #ffd700;
+      color: #004080;
+      transform: translateY(-3px);
+    }
+
+    /* Футер */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #004080;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    /* Адаптивність */
     @media (max-width: 768px) {
-      nav {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-      .container {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
       h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
       }
     }
 
     @media (max-width: 480px) {
       nav {
         flex-direction: column;
-        align-items: center;
-      }
-      nav a {
-        font-size: 1rem;
-      }
-      .container {
-        margin: 0.5rem;
-        padding: 1rem;
+        gap: 1rem;
       }
       h1 {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
       }
       p {
         font-size: 0.9rem;
@@ -128,41 +155,63 @@
 </head>
 <body>
 
-  <!-- Меню -->
+  <!-- Навігація -->
   <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Головна -->
-  <div class="container" id="home" style="animation-delay: 0.2s;">
+  <!-- Home -->
+  <section class="section" id="home">
     <h1>Welcome to Our Foundation</h1>
-    <p>We are dedicated to making the world a better place by helping communities in need. 
-       Our mission is to provide support, education, and opportunities for everyone.</p>
-  </div>
+    <p>We are dedicated to making the world a better place by supporting communities in need. 
+       Our mission is to provide education, resources, and opportunities for everyone.</p>
+    <a href="#about" class="btn">Learn More</a>
+  </section>
 
-  <!-- Про нас -->
-  <div class="container" id="about" style="animation-delay: 0.6s;">
+  <!-- About -->
+  <section class="section" id="about">
     <h1>About Us</h1>
-    <p>Our foundation was established to help people in difficult life situations. 
-       We focus on humanitarian aid, education, and social projects. 
-       Transparency and trust are our main values.</p>
-  </div>
+    <p>Our foundation was created to help people in challenging situations. 
+       We focus on humanitarian aid, social projects, and education. 
+       Transparency and trust are the values we live by.</p>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </section>
 
-  <!-- Контакти -->
-  <div class="container" id="contact" style="animation-delay: 1s;">
+  <!-- Contact -->
+  <section class="section" id="contact">
     <h1>Contact</h1>
     <p>Email: info@foundation.org</p>
     <p>Phone: +48 123 456 789</p>
     <p>Address: Marszałkowska Street 10, Warsaw</p>
-  </div>
+    <a href="#home" class="btn">Back to Top</a>
+  </section>
 
   <!-- Футер -->
   <footer>
-    © 2025 Sashacorporation. All rights reserved.
+    © 2025 Foundation. All rights reserved.
   </footer>
+
+  <!-- JS для плавного fade-in ефекту -->
+  <script>
+    const sections = document.querySelectorAll('.section');
+
+    function revealSections() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if (sectionTop < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
 
 </body>
 </html>
-
